@@ -46,6 +46,7 @@ func (rd RedirDns) ServeHTTP(w http.ResponseWriter, r *http.Request, next caddyh
 	rd.logger.Info("redir_dns", zap.String("host", r.Host), zap.String("response", response[0]))
 
 	w.Header().Set("Location", response[0])
+	w.WriteHeader(301)
 
 	return next.ServeHTTP(w, r)
 }
